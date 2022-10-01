@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-$ pnpm install
+$ npm install
 ```
 
 ## Running the app
@@ -15,7 +15,7 @@ $ pnpm install
 nvm use v16.15.0
 
 # development
-$ pnpm run start
+$ npm run start
 
 # watch mode
 $ npm run start:dev
@@ -28,7 +28,7 @@ $ npm run start:prod
 
 ```bash
 # unit tests
-$ pnpm run test
+$ npm run test
 
 # e2e tests
 $ npm run test:e2e
