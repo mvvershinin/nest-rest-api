@@ -1,38 +1,51 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
 import {
   CreateDepartmentDto,
   UpdateDepartmentDto
-} from './departments.dto.js';
+} from './departments.dto';
+import { DepartmentsService } from './departments.service.js';
 
 @Controller('departments')
 export class DepartmentsController {
-  @Get()
-  findAll(): string {
-    return 'This action returns all departments';
+  private readonly _service: DepartmentsService;
+
+  constructor(departmentService: DepartmentsService) {
+    this._service = departmentService;
   }
 
+
+  @Get()
+  async findAll(): Promise<any> {
+    //const data =
+    return await this._service.getAll();
+  }
+
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    console.log(id);
-    return `This action returns a ${id} department`;
+  async findOne(
+    @Param('id',  ParseUUIDPipe) id: string
+  ) {
+    return await this._service.getById(id);
   }
 
   @Post()
-  create(@Body() createCatDto: CreateDepartmentDto) {
-    return 'This action adds a new department';
+  async create(@Body() createDepartmentDto: CreateDepartmentDto) {
+    //todo auth
+    return await this._service.store(createDepartmentDto);
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
+  async update(
+    @Param('id',  ParseUUIDPipe) id: string,
     @Body() updateDepartmentDto: UpdateDepartmentDto
   ) {
-    console.log(id);
-    return `This action updates a #${id} department`;
+    //todo auth
+    return await this._service.update(id, updateDepartmentDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
+    //todo auth
     return `This action removes a #${id} department`;
   }
 }

@@ -17,15 +17,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const adapter = app.get(HttpAdapterHost);
+  /** todo exception handler
   const exceptionFilter = new AppExceptionsFilter(adapter);
-
   app.useGlobalFilters(exceptionFilter);
+  */
   app.enableShutdownHooks();
   app.setGlobalPrefix(config.server.route_prefix);
-
+/** todo validation exception handler
   const validatorPipe = new AppValidationPipe();
   app.useGlobalPipes(validatorPipe);
-
+*/
   const responseInterceptor = new ResponseInterceptor();
   app.useGlobalInterceptors(responseInterceptor);
 
