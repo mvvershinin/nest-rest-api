@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Status } from '../../../database/entity/department.entity.js';
 import DepartmentRepository from '../../../database/repositories/department.repository';
 import { CreateDepartmentDto, DepartmentDto, UpdateDepartmentDto } from './departments.dto.js';
 
@@ -13,7 +14,7 @@ export class DepartmentsService {
   }
 
   async getAll(){
-    return await this._repository.find();
+    return await this._repository.find({status: Status.ACTIVE});
   }
 
   async getById(id: string): Promise<any> {

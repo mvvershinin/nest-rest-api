@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 
@@ -27,6 +28,8 @@ async function bootstrap() {
   const validatorPipe = new AppValidationPipe();
   app.useGlobalPipes(validatorPipe);
 */
+  app.useGlobalPipes(new ValidationPipe());
+
   const responseInterceptor = new ResponseInterceptor();
   app.useGlobalInterceptors(responseInterceptor);
 

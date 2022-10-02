@@ -13,8 +13,7 @@ import * as bcrypt from 'bcrypt';
 
 export enum UserType {
   ADMIN = 1,
-  DEVELOPER = 2,
-  USER = 3,
+  USER = 2,
 }
 
 export enum UserStatus {

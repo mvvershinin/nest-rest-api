@@ -6,14 +6,4 @@ export default class DepartmentRepository extends Repository<Department> {
   constructor( ) {
     super();
   }
-  /*
-  async findByName(
-    name: string,
-    options?: FindOneOptions<Department>,
-  ): Promise<Department> {
-    const data = await this.findOne();
-
-    return data;
-  }
-   */
 }

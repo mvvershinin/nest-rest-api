@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength, MinLength, Validate } from 'class-validator';
+import { IsOptional, IsString, MaxLength, MinLength, Validate } from 'class-validator';
 import { Unique } from 'typeorm';
-import Department from '../../../database/entity/department.entity.js';
+import Department, { Status } from '../../../database/entity/department.entity.js';
 
 
 
@@ -10,13 +10,13 @@ export class CreateDepartmentDto {
   @IsString()
   @MinLength(2)
   @MaxLength(128)
-  //@Validate(Unique, [Department])
     //todo validate unique
   short_name: string;
 
   @ApiProperty()
   @MinLength(5)
   @MaxLength(254)
+    //todo validate unique
   name: string;
 }
 
@@ -26,12 +26,18 @@ export class UpdateDepartmentDto {
   @MaxLength(128)
   //@Validate(Unique, [Department, 'short_name'])
     //todo validate unique
-  short_name: string;
+  @IsOptional()
+  short_name?: string;
 
   @ApiProperty()
   @MinLength(5)
   @MaxLength(254)
-  name: string;
+  @IsOptional()
+  name?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  status?: Status
 }
 
 export class DepartmentDto {
